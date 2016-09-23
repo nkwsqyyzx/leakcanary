@@ -22,8 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
-
-import com.squareup.leakcanary.ResourceProvider;
+import com.squareup.leakcanary.R;
 
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
@@ -62,7 +61,7 @@ public class RequestStoragePermissionActivity extends Activity {
   @Override public void onRequestPermissionsResult(int requestCode, String[] permissions,
       int[] grantResults) {
     if (!hasStoragePermission()) {
-      Toast.makeText(getApplication(), ResourceProvider.provider().leak_canary_permission_not_granted(), LENGTH_LONG)
+      Toast.makeText(getApplication(), R.string.leak_canary_permission_not_granted, LENGTH_LONG)
           .show();
     }
     finish();
