@@ -48,9 +48,11 @@ public class RunAnalyzer {
     List<AnalysisResult> results = heapAnalyzer.checkForLeaks(file);
     for (AnalysisResult result : results) {
       if (result.failure != null) {
+        System.out.println("result parse error:");
         result.failure.printStackTrace();
       }
       if (result.leakTrace != null) {
+        System.out.println("found leak:");
         System.out.println(result.leakTrace);
       }
     }

@@ -173,12 +173,14 @@ public final class HeapAnalyzer {
   }
 
   private Set<String> keysForSnapshot(Snapshot snapshot) {
-    ClassObj refClass = snapshot.findClass(KeyedWeakReference.class.getName());
     Set<String> keysFound = new HashSet<>();
-    for (Instance instance : refClass.getInstancesList()) {
-      List<ClassInstance.FieldValue> values = classInstanceValues(instance);
-      String keyCandidate = asString(fieldValue(values, "key"));
-      keysFound.add(keyCandidate);
+    ClassObj refClass = snapshot.findClass(KeyedWeakReference.class.getName());
+    if (refClass != null) {
+      for (Instance instance : refClass.getInstancesList()) {
+        List<ClassInstance.FieldValue> values = classInstanceValues(instance);
+        String keyCandidate = asString(fieldValue(values, "key"));
+        keysFound.add(keyCandidate);
+      }
     }
     return keysFound;
   }
